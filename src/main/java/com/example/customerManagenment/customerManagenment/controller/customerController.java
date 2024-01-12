@@ -42,6 +42,12 @@ public class customerController {
         return this.customerRepository.save(customer);
     }
 
+    // Create Multiple Customers
+    @PostMapping("/createMultiple")
+    public List<customer> createMultipleCustomers(@RequestBody List<customer> customers) {
+        return customerRepository.saveAll(customers);
+    }
+
     //Update Customer
     @PutMapping("/{id}")
     public  ResponseEntity<customer> updateCustomer(@PathVariable(value = "id")UUID custId, @Validated @RequestBody customer customerDetails) throws ResourceNotFoundException{
@@ -63,4 +69,15 @@ public class customerController {
         response.put("deleted",Boolean.TRUE);
         return response;
     }
+
+    // Delete All Customers
+    @DeleteMapping("/deleteAll")
+    public Map<String, Boolean> deleteAllCustomers() {
+        customerRepository.deleteAll();
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("deletedAll", Boolean.TRUE);
+        return response;
+    }
+
+
 }
