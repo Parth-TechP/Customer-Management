@@ -7,6 +7,8 @@ import com.example.customerManagenment.customerManagenment.model.customer;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -43,9 +45,14 @@ public class customerController {
     }
 
     // Create Multiple Customers
+    // @PostMapping("/createMultiple")
+//    public ResponseEntity<List<customer>> createMultipleCustomers(@RequestBody List<customer> customers) {
+//        List<customer> ls =  this.customerRepository.saveAll(customers);
+//        return new ResponseEntity<>(ls, HttpStatus.CREATED);
+//    }
     @PostMapping("/createMultiple")
-    public List<customer> createMultipleCustomers(@RequestBody List<customer> customers) {
-        return customerRepository.saveAll(customers);
+    public List<customer> createMultipleCustomers(@RequestBody List<customer> customer){
+        return this.customerRepository.saveAll(customer);
     }
 
     //Update Customer
